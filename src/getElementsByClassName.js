@@ -9,23 +9,36 @@ var getElementsByClassName = function(className) {
   var matchElements = [];
 
   var helper = function(element) {
-    // console.log(typeof classes.length);
-    debugger;
     var classes = element.classList;
     if (classes && classes.contains(className)) {
       matchElements.push(element);
     }
 
-    var children = element.childNodes;
-    for (var i = 0; i < children.length; i++) {
-      helper(children[i]);
+    if (element.hasChildNodes()) {
+      var children = element.childNodes;
+      for (var i = 0; i < children.length; i++) {
+        helper(children[i]);
+      }
     }
+
   };
 
   helper(document.body);
   return matchElements;
 };
 
+
+
+
+
+
+
+
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
 // I : string class name
 // O : array of dom nodes
 
