@@ -9,14 +9,14 @@ var getElementsByClassName = function(className) {
   var matchElements = [];
 
   var helper = function(element) {
-    if (element.classList.includes(className)) {
+    // console.log(typeof classes.length);
+    debugger;
+    var classes = element.classList;
+    if (classes && classes.contains(className)) {
       matchElements.push(element);
     }
 
     var children = element.childNodes;
-    // for (var child of children) {
-    //   helper(child);
-    // }
     for (var i = 0; i < children.length; i++) {
       helper(children[i]);
     }
@@ -28,3 +28,45 @@ var getElementsByClassName = function(className) {
 
 // I : string class name
 // O : array of dom nodes
+
+// docuemnt.body
+// element.childNodes
+// element.classList
+
+/*
+HIGH LEVEL STRATEGY
+  start at the root element
+    check if its class list includes the given className
+      if yes
+        add element to return collection
+    get all the root elements' children
+
+    for each child element
+      check if its class list includes the given className
+      if yes
+        add element to return collection
+    get all current elements' children
+
+*/
+
+
+// var getElementsByClassName = function(className) {
+//   let matchElements = [];
+
+//   let matchClass = function(node, innerClassName) {
+//     if (node.classList && node.classList.contains(innerClassName)) {
+//       matchElements.push(node);
+//     }
+
+//     node.childNodes.forEach(function(child) {
+//       if (child.classList && child.classList.contains(className)) {
+//         matchElements.push(child);
+//       }
+//       matchClass(child);
+//     });
+//   };
+
+//   matchClass(document.body);
+//   console.log(matchElements);
+//   return matchElements;
+// };
