@@ -11,23 +11,21 @@ var stringifyJSON = function(obj) {
   } else if (typeof obj !== 'object') {
     return String(obj);
   } else if (Array.isArray(obj)) {
-    // array case
-    let stringifiedElements = [];
-
-    // define function
-
+    // ARRAY CASE
+    // let stringifiedArray = '';
+    var stringifiedElements = [];
     if (obj.length === 1) {
-      stringifiedElements.push(stringifyJSON(obj[0]));
+      // stringifiedArray = stringifiedArray + stringifyJSON(obj[0]);
+      stringifiedElements = stringifiedElements.concat(stringifyJSON(obj[0]));
     } else if (obj.length > 1) {
-      stringifiedElements.push(stringifyJSON(obj[0]));
-      stringifyJSON(obj.slice(1));
+      stringifiedElements = [stringifyJSON(obj[0])].concat(stringifyJSON(obj.slice(1)));
     }
 
     return '[' + stringifiedElements.join(',') + ']';
-
-    // end function
   } else {
-    // obj case
+    // OBJECT CASE
+
+
   }
 
 };
