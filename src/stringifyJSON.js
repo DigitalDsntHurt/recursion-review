@@ -15,24 +15,49 @@ var stringifyJSON = function(obj) {
   } else if (typeof obj !== 'object') {
     return String(obj);
   } else if (Array.isArray(obj)) {
-    // ARRAY CASE
-    // let stringifiedArray = '';
-    var stringifiedElements = [];
-    if (obj.length === 1) {
-      // stringifiedArray = stringifiedArray + stringifyJSON(obj[0]);
-      stringifiedElements = stringifiedElements.concat(stringifyJSON(obj[0]));
-    } else if (obj.length > 1) {
-      stringifiedElements = [stringifyJSON(obj[0])].concat(stringifyJSON(obj.slice(1)));
-    }
+    var stringifiedElements = '[';
+    var helper = function(arr) {
+      if (arr.length === 1) {
+        stringifiedElements += stringifyJSON(arr[0]);
+      } else if (arr.length > 1) {
+        stringifiedElements += stringifyJSON(arr[0]) + ',';
+        helper(arr.slice(1));
+      }
+    };
 
-    return '[' + stringifiedElements.join(',') + ']';
+    helper(obj);
+    return stringifiedElements + ']';
   } else {
     // OBJECT CASE
+    let stringifiedElements = '{';
+
+    var helper = function(obj) {
+      let keys = Object.keys(obj);
+
+      if (keys.length === 1) {
+        stringifiedElements += stringifyJSON(keys[0]) + ':' + stringifyJSON(obj[keys[0]]);
+      } else if (keys.length > 1) {
+        stringifiedElements += stringifyJSON(keys[0]) + ':' + stringifyJSON(obj[keys[0]]) + ',';
+        delete obj[keys[0]];
+        helper(obj);
+      }
+    };
 
 
   }
 
 };
+
+
+
+
+
+
+
+
+
+
+
 
 
 // //
