@@ -3,6 +3,10 @@
 
 // but you don't so you're going to write it from scratch:
 
+//
+//// PAIR SOLUTION
+//
+
 var stringifyJSON = function(obj) {
   if (obj === null) {
     return 'null';
@@ -31,16 +35,50 @@ var stringifyJSON = function(obj) {
 };
 
 
-// number
+// //
+// // // NS SOLO SOLUTION
+// //
 
-// null
+// var stringifyJSON = function(obj) {
+//   if (obj === null) {
+//     return 'null';
+//   } else if (typeof obj === 'string') {
+//     return '"' + String(obj) + '"';
+//   } else if (typeof obj !== 'object') {
+//     return String(obj);
+//   } else if (Array.isArray(obj)) {
+//     // ARRAY CASE
+//     return stringifyArray(obj);
+//   } else {
+//     return stringifyObj(obj);
+//   }
 
-// boolean
+// };
 
-// string
+// var stringifyArray = function(array) {
+//   var stringified = '';
+//   for (var item of array) {
+//     if (item === null) { stringified += 'null, '; }
+//     if (typeof item !== 'object') { stringified += item + ', '; }
+//     if (Object.prototype.toString.call(item) === '[object Array]') { stringified += stringifyArray(item); }
+//     if (Object.prototype.toString.call(item) === '[object Object]') { stringified += stringifyObj(item); }
+//   }
+//   return '{' + stringified.slice(0, -1) + '}';
+// };
 
-// array
-
-// object
-
+// var stringifyObj = function(obj) {
+//   if (Object.keys(obj).length === 0) {
+//     return '{}';
+//   }
+//   var stringified = '';
+//   for (var key in obj) {
+//     stringified += '"' + key + '":';
+//     var value = obj[key];
+//     if (value === null) { stringified += 'null, '; }
+//     if (typeof value !== 'object') { stringified += value + ', '; }
+//     if (Object.prototype.toString.call(value) === '[object Array]') { stringified += stringifyArray(value); }
+//     if (Object.prototype.toString.call(value) === '[object Object]') { stringified += stringifyObj(value); }
+//   }
+//   return '{' + stringified.slice(0, -1) + '}';
+// };
 
